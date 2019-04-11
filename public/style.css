@@ -1,0 +1,11 @@
+#container {
+    font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif;
+    display: flex;
+    flex-direction: column;
+}
+
+ #photoToggle {
+     display: flex;
+     flex-direction: column;
+ }
+
