@@ -2,6 +2,7 @@
     font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif;
     display: flex;
     flex-direction: column;
+    width: auto;
 }
 
  #photoToggle {
@@ -9,3 +10,19 @@
      flex-direction: column;
  }
 
+ #booking-container {
+     margin-left: -275px;
+     position: -webkit-sticky; 
+     position: sticky;
+     top: 0;  
+
+ }
+
+ @media (min-height: 800px) {
+    #booking-container {
+        position: static;
+        top: -500px;
+		
+    }
+ }
+ 

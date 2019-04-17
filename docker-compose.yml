@@ -1,0 +1,91 @@
+version: '3'
+
+services:
+  server:
+    build: ./
+    depends_on:
+      - 'database1'
+      - 'database2'
+      - 'reviewdatabase'
+      - 'database4'
+      - 'mongo-seed1'
+      - 'mongo-seed2'
+      - 'mongo-seed3'
+      - 'mongo-seed4'
+      - 'picture'
+      - 'apartment'
+      - 'review'
+      - 'misc'
+    ports: 
+      - '4000:4000'
+
+  picture:
+    image: annap23/picture:version3
+    depends_on: 
+      - 'database1'
+    ports: 
+      - '3006:3006'
+
+  database1: 
+    image: mongo:latest
+
+  mongo-seed1:
+    image: annap23/picture:version3
+    depends_on:
+      - 'database1'
+      - 'picture'
+    command: sh -c "npm run seedDB"
+
+  apartment:
+    image: annap23/apartment:version3
+    depends_on:
+      - 'database2'
+    ports:
+      - '3003:3003'
+
+  database2: 
+    image: mongo:latest
+
+  mongo-seed2:
+    image: annap23/apartment:version3
+    depends_on:
+      - 'database2'
+      - 'apartment'
+    command: sh -c "npm run seed"
+
+  review:
+    image: annap23/reviews:version4
+    depends_on: 
+      - 'reviewdatabase'
+    ports: 
+      - '3004:3004'
+
+  reviewdatabase: 
+    image: mongo:latest
+
+  mongo-seed3:
+    image: annap23/reviews:version4
+    depends_on:
+      - 'reviewdatabase'
+      - 'review'
+    command: sh -c "npm run seed"
+
+  misc:
+    image: annap23/misc:version3
+    depends_on:
+      - 'database4'
+    ports:
+      - '3001:3001'
+
+  database4: 
+    image: mongo:latest
+
+  mongo-seed4:
+    image: annap23/misc:version3
+    depends_on:
+      - 'database4'
+      - 'misc'
+    command: sh -c "npm run seed"
+
+
+ 
